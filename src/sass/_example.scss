@@ -26,3 +26,22 @@
   background-size: cover;
   background-position: center;
 }
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.is-hidden {
+  display: none;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+.photo-card {
+  box-shadow: 0px 1px 5px 0px rgba(0, 5, 38, 0.26);
+}
