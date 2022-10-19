@@ -6,6 +6,7 @@ const formInput = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
 const loadMoreButton = document.querySelector('.load-more');
 const photoApiService = new PhotoApiService();
+const lightbox = new SimpleLightbox('.gallery a');
 formInput.addEventListener('submit', onFormSubmit);
 loadMoreButton.addEventListener('click', onLoadMore);
 
@@ -21,13 +22,14 @@ async function onFormSubmit(event) {
 
   const markup = createMarkup(serchResult);
   populateGallery(markup);
-
+  lightbox.refresh();
   showHideLoadMoreBtn(serchResult);
 }
 
 async function onLoadMore() {
   const serchResult = await photoApiService.fetchPhoto();
   populateGallery(createMarkup(serchResult));
+  lightbox.refresh();
   if (serchResult.hits.length < 40) {
     loadMoreButton.classList.add('is-hidden');
     Notiflix.Notify.info(
@@ -89,8 +91,3 @@ function showHideLoadMoreBtn(data) {
     loadMoreButton.classList.add('is-hidden');
   }
 }
-const lightbox = new SimpleLightbox('.gallery a', {
-  captions: true,
-  captionPosition: 'bottom',
-  captionDelay: 250,
-});
